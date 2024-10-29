@@ -10,12 +10,12 @@ app.use('/api', createProxyMiddleware({
     target: 'https://script.google.com',
     changeOrigin: true,
     pathRewrite: {
-        '^/api': '/macros/s/AKfycbwLp7LSTd4X3QT6t0iuAgWdjdTnitM7IK3d_8AcCpFx7cCPnyjI20GWOMSb9BUES3r7/exec'
+        '^/api': '/macros/s/AKfycbymucHyMeANwDRi7xtl0IbXppo4PJt8DgWmsAK4g-KMBKuZ6veqCZymTy2GpVqPVLX5/exec'
     },
     onProxyReq: (proxyReq, req, res) => {
         // 원본 URL의 쿼리 문자열을 유지
         const originalUrl = new URL(req.url, `http://${req.headers.host}`);
-        proxyReq.path = '/macros/s/AKfycbwLp7LSTd4X3QT6t0iuAgWdjdTnitM7IK3d_8AcCpFx7cCPnyjI20GWOMSb9BUES3r7/exec' + originalUrl.search;
+        proxyReq.path = '/macros/s/AKfycbymucHyMeANwDRi7xtl0IbXppo4PJt8DgWmsAK4g-KMBKuZ6veqCZymTy2GpVqPVLX5/exec' + originalUrl.search;
         
         console.log('Proxying request to:', proxyReq.path);
     },
