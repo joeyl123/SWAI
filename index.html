@@ -1278,39 +1278,39 @@
 							console.log(error.config);
 						});
 						
-					$("#submit").on("click", function () {
-						const email = $("#submit-email").val();
-						const advice = $("#submit-advice").val();
-				
-						function validateEmail(email) {
-							var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-							return re.test(email);
-						}
-				
-						if (email == '' || !validateEmail(email)) {
-							alert("이메일이 유효하지 않아 알림을 드릴 수가 없습니다. ");
-							return;
-						}
-				
-						var finalData = JSON.stringify({
-							"id": getUVfromCookie(),
-							"email": email,
-							"advice": advice
-						})
-						
-						addrScript = 'https://script.google.com/macros/s/AKfycbzU03SlBcTqnc8lI48NwDyaH8-mMR5Twm5TQM4RAdrX9vWxtkKTX1JTwcHppvRR22zJ/exec';
+				$("#submit").on("click", function () {
+					const email = $("#submit-email").val();
+					const advice = $("#submit-advice").val();
+			
+					function validateEmail(email) {
+						var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+						return re.test(email);
+					}
+			
+					if (email == '' || !validateEmail(email)) {
+						alert("이메일이 유효하지 않아 알림을 드릴 수가 없습니다. ");
+						return;
+					}
+			
+					var finalData = JSON.stringify({
+						"id": getUVfromCookie(),
+						"email": email,
+						"advice": advice
+					})
+					
+					addrScript = 'https://script.google.com/macros/s/AKfycbzU03SlBcTqnc8lI48NwDyaH8-mMR5Twm5TQM4RAdrX9vWxtkKTX1JTwcHppvRR22zJ/exec';
 
-						$.ajax({
-							url: addrScript+'?action=insert&table=registration&data='+finalData,
-							dataType: 'jsonp',
-							success: function (finalData) {
-							console.log('성공 - ', JSON.stringify(finalData));
-							},
-							error: function (xhr) {
-							console.log('실패 - ', JSON.stringify(xhr));
-							}
-							});		
-				    });
+					$.ajax({
+						url: addrScript+'?action=insert&table=registration&data='+finalData,
+						dataType: 'jsonp',
+						success: function (finalData) {
+						console.log('성공 - ', JSON.stringify(finalData));
+						},
+						error: function (xhr) {
+						console.log('실패 - ', JSON.stringify(xhr));
+						}
+						});		
+				});
 	</script>
 
 </html>
