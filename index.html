@@ -1187,18 +1187,50 @@
 						return existingHash;
 					}
 				}
-							
+
+				
+				// Sam pading value to start with 0. eg: 01, 02, .. 09, 10, ..
+				function padValue(value) {
+					return (value < 10) ? "0" + value : value;
+				}
+
+				function getTimeStamp() {
+					const date = new Date();
+
+					const year = date.getFullYear();
+					const month = date.getMonth() + 1;
+					const day = date.getDate();
+					const hours = date.getHours();
+					const minutes = date.getMinutes();
+					const seconds = date.getSeconds();
+
+					const formattedDate = `${padValue(year)}-${padValue(month)}-${padValue(day)} ${padValue(hours)}:${padValue(minutes)}:${padValue(seconds)}`;
+
+					return formattedDate;
+				}
+				
+				var queryString = location.search;
+				const urlParams = new URLSearchParams(queryString);
+				const utm = urlParams.get("utm")
+
+				var mobile = 'desktop';
+				if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+					// true for mobile device
+					mobile = 'mobile';
+				}
 			
 				/* data를 만들 땐 모든 field가 들어 있어야 함 */
 				var data = JSON.stringify(
 					               {"id": getUVfromCookie(),
 							"landingUrl":window.location.href, 
 							"ip":ip, 
-							"referer":"https://instagram.com/yonsei",
-							"time_stamp":"2024-03-29 13:00:00", 
-							"utm":"twitter",
-							"device":"mobile"}
+							"referer":document.referrer,
+							"time_stamp":getTimeStamp(), 
+							"utm":utm,
+							"device":mobile}
 							);
+
+				
 
 				$(document).ready(function () {
 
