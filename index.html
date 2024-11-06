@@ -1306,6 +1306,7 @@
 							alert(JSON.stringify(response));
 							$('#submit-email').val('');
 							$('#submit-advice').val('');
+							$.fn.simplePopup({ type: "html", htmlSelector: "#popup" });
 							})
 					});
 		</script>
