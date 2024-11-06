@@ -1254,9 +1254,9 @@
 
    
 			$(document).ready(function () {
-					/*
+					
 					$.ajax({
-					    url: 'https://script.google.com/macros/s/AKfycbxdIL7qepDjqI28PrFc8AmpiDJ5to0dT7F9NfHQdoHqGvR6eXbISRoqSg1yb6YnDmhHUg/exec?action=insert&id=id&table=tab_master&data='+data,
+					    url: 'https://script.google.com/macros/s/AKfycbzU03SlBcTqnc8lI48NwDyaH8-mMR5Twm5TQM4RAdrX9vWxtkKTX1JTwcHppvRR22zJ/exec?action=insert&id=id&table=tab_master&data='+data,
 					    dataType: 'jsonp',
 					    success: function (data) {
 						console.log('성공 - ', JSON.stringify(data));
@@ -1265,7 +1265,7 @@
 						console.log('실패 - ', JSON.stringify(xhr));
 					    }
 					});
-					*/
+					
 
 					axios.get('https://script.google.com/macros/s/AKfycbzU03SlBcTqnc8lI48NwDyaH8-mMR5Twm5TQM4RAdrX9vWxtkKTX1JTwcHppvRR22zJ/exec?action=insert&table=tab_master&data='+data)
                     				.then(response => {
