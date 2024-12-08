@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
+    <!--responsive.css-->
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Submission Form</title>
@@ -26,6 +28,9 @@
 </head>
 <body>
     <div class="link-form">
+        <form id="emailForm">
+            <input type="submitEmail" id="submit-email" name="emailInput" placeholder="Enter your email" required>
+        </form>
         <form id="naverForm">
             <input type="text" id="naverBlogLink" name="naverBlogLink" placeholder="Enter Naver Blog text" required>
             <button type="submit">Submit Naver Blog</button>
@@ -41,6 +46,10 @@
     </div>
     <div id="linkList" class="links-display"></div>
     <button id="finalSubmitButton">Final Submit</button>
+
+    <!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+    <script src="assets/js/jquery.js"></script>
 
     <script>
         document.getElementById('naverForm').addEventListener('submit', function(event) {
@@ -88,11 +97,47 @@
             document.getElementById('tistoryBlogLink').value = ''; // Clear the input field
         });
 
-        document.getElementById('finalSubmitButton').addEventListener('click', function() {
+        /*document.getElementById('finalSubmitButton').addEventListener('click', function() {
             const linkList = document.getElementById('linkList');
             const links = Array.from(linkList.querySelectorAll('p')).map(p => p.textContent).join('\n');
             alert(`Submitted Links:\n${links}`);
-        });
+        });*/
     </script>
+
+    <script>
+    $("#finalSubmitButton").on("click", function () {
+        const email = $("#submit-email").val();
+        const subscriptionlist = $("#linkList").val();
+        alert($("#submit-email").val());
+
+        function validateEmail(email) {
+            var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return re.test(email);
+        }
+
+        if (email == '' || !validateEmail(email)) {
+            alert("이메일이 유효하지 않아 알림을 드릴 수가 없습니다. ");
+            return;
+        }
+
+        var finalData = JSON.stringify({
+            "id": getUVfromCookie(),
+            "email": email,
+            "subscriptionlist": subscriptionlist
+        })
+
+        $.busyLoadFull("show");
+
+        axios.get('https://script.google.com/macros/s/AKfycbzU03SlBcTqnc8lI48NwDyaH8-mMR5Twm5TQM4RAdrX9vWxtkKTX1JTwcHppvRR22zJ/exec?action=insert&table=subscriptionlist&data=' + finalData)
+            .then(response => {
+            console.log(response.data.data);
+            $('#submit-email').val('');
+            $('#submit-advice').val('');
+            $.fn.simplePopup({ type: "html", htmlSelector: "#popup" });
+            $.busyLoadFull("hide");
+            })
+    });
+    </script>
+
 </body>
 </html>
