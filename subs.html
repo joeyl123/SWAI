@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Submission Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .link-form {
+            margin-bottom: 20px;
+        }
+
+        .links-display {
+            font-size: 1rem;
+            max-width: 600px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="link-form">
+        <form id="naverForm">
+            <input type="text" id="naverBlogLink" name="naverBlogLink" placeholder="Enter Naver Blog text" required>
+            <button type="submit">Submit Naver Blog</button>
+        </form>
+        <form id="brunchForm">
+            <input type="text" id="brunchBlogLink" name="brunchBlogLink" placeholder="Enter Brunch Blog text" required>
+            <button type="submit">Submit Brunch Blog</button>
+        </form>
+        <form id="tistoryForm">
+            <input type="text" id="tistoryBlogLink" name="tistoryBlogLink" placeholder="Enter Tistory Blog text" required>
+            <button type="submit">Submit Tistory Blog</button>
+        </form>
+    </div>
+    <div id="linkList" class="links-display"></div>
+    <button id="finalSubmitButton">Final Submit</button>
+
+    <script>
+        document.getElementById('naverForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from refreshing the page
+
+            const naverLink = document.getElementById('naverBlogLink').value;
+            const linkList = document.getElementById('linkList');
+
+            if (naverLink) {
+                const linkElement = document.createElement('p');
+                linkElement.textContent = `Naver Blog: ${naverLink}`;
+                linkList.appendChild(linkElement);
+            }
+
+            document.getElementById('naverBlogLink').value = ''; // Clear the input field
+        });
+
+        document.getElementById('brunchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from refreshing the page
+
+            const brunchLink = document.getElementById('brunchBlogLink').value;
+            const linkList = document.getElementById('linkList');
+
+            if (brunchLink) {
+                const linkElement = document.createElement('p');
+                linkElement.textContent = `Brunch Blog: ${brunchLink}`;
+                linkList.appendChild(linkElement);
+            }
+
+            document.getElementById('brunchBlogLink').value = ''; // Clear the input field
+        });
+
+        document.getElementById('tistoryForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from refreshing the page
+
+            const tistoryLink = document.getElementById('tistoryBlogLink').value;
+            const linkList = document.getElementById('linkList');
+
+            if (tistoryLink) {
+                const linkElement = document.createElement('p');
+                linkElement.textContent = `Tistory Blog: ${tistoryLink}`;
+                linkList.appendChild(linkElement);
+            }
+
+            document.getElementById('tistoryBlogLink').value = ''; // Clear the input field
+        });
+
+        document.getElementById('finalSubmitButton').addEventListener('click', function() {
+            const linkList = document.getElementById('linkList');
+            const links = Array.from(linkList.querySelectorAll('p')).map(p => p.textContent).join('\n');
+            alert(`Submitted Links:\n${links}`);
+        });
+    </script>
+</body>
+</html>
