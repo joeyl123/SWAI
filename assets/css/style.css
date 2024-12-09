@@ -425,7 +425,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     font-size: 12px;
     background: transparent;
     color: #767f86;
-    padding-top: 85px;
+    padding-top: 8px;
     border: 1px solid #d3d6d9;
     border-radius: 3px;
 }
@@ -841,6 +841,28 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     background: #f43032;
 }
 /*appsLand-btn*/
+
+.subscribe-btn {
+    top: 0;
+    right: 0;
+    background: #ff545a;
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    text-decoration: none;
+    text-transform:capitalize;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: 0;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-transition:0.3s ease-in-out;
+    -moz-transition:0.3s ease-in-out;
+    -o-transition:0.3s ease-in-out;
+    transition:0.3s ease-in-out;
+}
 
 /*-------------------------------------
         12. Footer
