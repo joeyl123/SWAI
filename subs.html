@@ -86,8 +86,8 @@
 			</form>
 		</div>
 		<div id="linkList" class="links-display"></div>
-		<button id="finalSubmitButton">Final Submit</button>
-	
+		<button id="finalSubmitButton">Subscribe</button>
+
 		<!-- Include all js compiled plugins (below), or include individual files as needed -->
 	
 		<script src="assets/js/jquery.js"></script>
@@ -361,8 +361,13 @@
 							
 					$("#finalSubmitButton").on("click", function () {
 						const email = $("#submit-email").val();
-						const subscriptions = $("#linkList").val();
-				
+						const linkList = document.getElementById("linkList");
+    
+						// Collect all text content from 'linkList' paragraph elements
+						const links = Array.from(linkList.querySelectorAll("p"))
+							.map(p => p.textContent)
+							.join("\n");
+
 						function validateEmail(email) {
 							var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 							return re.test(email);
@@ -376,7 +381,7 @@
 						var finalData = JSON.stringify({
 							"id": getUVfromCookie(),
 							"email": email,
-							"subscriptionslist": subscriptions
+							"subscriptionslist": links
 						})
 
 						$.busyLoadFull("show");
@@ -398,4 +403,115 @@
     </div>
 
 	</body>
+
+	<style>
+        body {
+            font-family: Poppins, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 30px;
+        }
+
+        .link-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="submitEmail"],
+        button {
+            width: 80%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        input[type="text"],
+        input[type="submitEmail"] {
+            transition: box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="submitEmail"]:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 102, 255, 0.3);
+        }
+
+        button {
+            background-color: #ffcbcc;
+			width: 30%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffa7aa;
+        }
+
+        #linkList {
+            margin-top: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        #linkList > div {
+            padding: 0.8rem;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        #linkList > div:last-child {
+            border-bottom: none;
+        }
+
+        #finalSubmitButton {
+			display: block;
+			margin: 0 auto;
+			text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            font-size: 1.4rem;
+            background-color: #ff545a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #finalSubmitButton:hover {
+            background-color: #f8363c;
+        }
+    </style>
+
 </html>
